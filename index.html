@@ -7,10 +7,390 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Full CSS styles omitted for brevity */
+        body {
+            font-family: 'Orbitron', 'Tajawal', sans-serif;
+            background-color: #0F0F0F;
+            color: #F5F5F5;
+            scroll-behavior: smooth;
+        }
+        .hero-title {
+            font-weight: 900;
+            font-size: 4rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #F5F5F5, #AAAAAA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .search-card {
+            background-color: rgba(28, 28, 28, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            box-shadow: inset 0 0 15px rgba(255, 102, 0, 0.1);
+        }
+        .result-card {
+            background: linear-gradient(145deg, #1C1C1C, #121212);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 0 15px rgba(255, 102, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .feature-card {
+            background: rgba(28, 28, 28, 0.4);
+            border-radius: 1rem;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 0 15px rgba(255, 102, 0, 0.2);
+        }
+        .partner-logo {
+            background-color: #1C1C1C;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .cta-button {
+            background-color: #FF6600;
+            color: #000;
+            font-weight: 700;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+        }
+        .search-button {
+            background-color: #FF6600;
+            color: #000;
+            font-weight: 700;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+        .search-button:hover {
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+        }
+        .book-button {
+            background-color: #FF6600;
+            color: #000;
+            font-weight: 700;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .book-button:hover {
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+        }
+        input {
+            background-color: #1C1C1C;
+            color: #F5F5F5;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            box-shadow: inset 0 0 10px rgba(255, 102, 0, 0.3);
+        }
+        input:hover {
+            box-shadow: inset 0 0 10px rgba(255, 102, 0, 0.2);
+        }
+        .energy-line {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- محتوى الموقع (تم اختصاره هنا، لكن الملف الفعلي يحتوي على كل شيء) -->
+    <!-- Energy Lines Background -->
+    <svg class="energy-line" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#FF6600" stroke-width="0.5"/>
+            </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+
+    <!-- Hero Section -->
+    <section class="py-32 px-4 text-center relative overflow-hidden">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="hero-title mb-6">نظام مقارنة الرحلات الذكي</h1>
+            <p class="text-xl mb-10 opacity-80">تقنية الذكاء الصناعي لمقارنة أسعار الرحلات من 10 مصادر عالمية</p>
+            <button onclick="document.getElementById('searchSection').scrollIntoView({behavior: 'smooth'})" class="cta-button px-12 py-5 text-xl mx-auto">ابدأ الآن</button>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section id="searchSection" class="py-16 px-4">
+        <div class="max-w-4xl mx-auto search-card p-8">
+            <h2 class="text-2xl font-bold mb-8 text-center">أدخل تفاصيل رحلتك</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div>
+                    <label for="from" class="block mb-2 text-right opacity-80">من</label>
+                    <input type="text" id="from" placeholder="المدينة أو المطار" class="w-full p-4">
+                </div>
+                <div>
+                    <label for="to" class="block mb-2 text-right opacity-80">إلى</label>
+                    <input type="text" id="to" placeholder="المدينة أو المطار" class="w-full p-4">
+                </div>
+                <div>
+                    <label for="date" class="block mb-2 text-right opacity-80">التاريخ</label>
+                    <input type="date" id="date" class="w-full p-4">
+                </div>
+            </div>
+            <div class="text-center">
+                <button id="searchBtn" class="search-button px-10 py-3 text-lg">ابحث الآن</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section (Initially Hidden) -->
+    <section id="resultsSection" class="py-16 px-4 hidden">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8 text-right">نتائج البحث</h2>
+            <div id="resultsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Results will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">لماذا نستخدم نظامنا؟</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="feature-card p-6">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-2">سرعة فائقة</h3>
+                    <p class="text-gray-400 opacity-80">نتائج فورية خلال ثوانٍ معدودة</p>
+                </div>
+                <div class="feature-card p-6">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold mb-2">ذكاء صناعي</h3>
+                    <p class="text-gray-400 opacity-80">خوارزميات متطورة لتحليل الأسعار</p>
+                </div>
+                <div class="feature-card p-6">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold mb-2">توفير مالي</h3>
+                    <p class="text-gray-400 opacity-80">وفر حتى 40% من سعر التذكرة</p>
+                </div>
+                <div class="feature-card p-6">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="text-xl font-bold mb-2">أمان كامل</h3>
+                    <p class="text-gray-400 opacity-80">بياناتك محمية بنظام تشفير متقدم</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">شركاؤنا في النظام</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="partner-logo p-4 flex items-center justify-center h-20">
+                    <span class="font-bold">Skyscanner</span>
+                </div>
+                <div class="partner-logo p-4 flex items-center justify-center h-20">
+                    <span class="font-bold">Booking</span>
+                </div>
+                <div class="partner-logo p-4 flex items-center justify-center h-20">
+                    <span class="font-bold">Trip.com</span>
+                </div>
+                <div class="partner-logo p-4 flex items-center justify-center h-20">
+                    <span class="font-bold">Expedia</span>
+                </div>
+                <div class="partner-logo p-4 flex items-center justify-center h-20">
+                    <span class="font-bold">Qatar Airways</span>
+                </div>
+                <div class="partner-logo p-4 flex items-center justify-center h-20">
+                    <span class="font-bold">Wego</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-gray-300 opacity-80 hover:opacity-100">الرئيسية</a></li>
+                        <li><a href="#" class="hover:text-gray-300 opacity-80 hover:opacity-100">من نحن</a></li>
+                        <li><a href="#" class="hover:text-gray-300 opacity-80 hover:opacity-100">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+                    <ul class="space-y-2 opacity-80">
+                        <li>البريد: support@flightai.com</li>
+                        <li>الهاتف: +966 50 123 4567</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">النظام الذكي</h3>
+                    <p class="opacity-80">تقنية الذكاء الصناعي المتقدمة لمقارنة أسعار الرحلات الجوية حول العالم</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center opacity-60">
+                <p>© 2025 نظام مقارنة الرحلات الذكي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample flight data
+        const flightData = [
+            {
+                airline: "الخطوط السعودية",
+                logo: "🇸🇦",
+                departure: "08:00",
+                arrival: "10:30",
+                duration: "2h 30m",
+                price: "1,350 ر.س",
+                provider: "Trip.com",
+                link: "https://www.trip.com"
+            },
+            {
+                airline: "طيران الإمارات",
+                logo: "🇦🇪",
+                departure: "12:15",
+                arrival: "15:45",
+                duration: "3h 30m",
+                price: "1,550 ر.س",
+                provider: "Expedia",
+                link: "https://www.expedia.com"
+            },
+            {
+                airline: "الخطوط القطرية",
+                logo: "🇶🇦",
+                departure: "09:30",
+                arrival: "12:00",
+                duration: "2h 30m",
+                price: "1,420 ر.س",
+                provider: "Skyscanner",
+                link: "https://www.skyscanner.com"
+            },
+            {
+                airline: "الخطوط التركية",
+                logo: "🇹🇷",
+                departure: "14:00",
+                arrival: "18:30",
+                duration: "4h 30m",
+                price: "1,290 ر.س",
+                provider: "Booking",
+                link: "https://www.booking.com"
+            },
+            {
+                airline: "الخطوط المصرية",
+                logo: "🇪🇬",
+                departure: "07:45",
+                arrival: "11:15",
+                duration: "3h 30m",
+                price: "1,180 ر.س",
+                provider: "Wego",
+                link: "https://www.wego.com"
+            },
+            {
+                airline: "الخطوط الكويتية",
+                logo: "🇰🇼",
+                departure: "10:20",
+                arrival: "13:10",
+                duration: "2h 50m",
+                price: "1,320 ر.س",
+                provider: "Trip.com",
+                link: "https://www.trip.com"
+            }
+        ];
+
+        // Search button click handler
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const date = document.getElementById('date').value;
+            
+            if (from && to && date) {
+                displayResults();
+            } else {
+                alert('الرجاء إدخال جميع بيانات البحث');
+            }
+        });
+
+        // Display flight results with animation
+        function displayResults() {
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = '';
+            
+            flightData.forEach((flight, index) => {
+                const flightCard = document.createElement('div');
+                flightCard.className = 'result-card p-6 fade-in-up';
+                flightCard.style.animationDelay = `${index * 0.1}s`;
+                flightCard.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-4xl">${flight.logo}</span>
+                        <span class="text-sm bg-gray-900 px-3 py-1 rounded-full opacity-80">${flight.provider}</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">${flight.airline}</h3>
+                    <div class="flex justify-between py-4 border-b border-gray-800">
+                        <div>
+                            <div class="text-gray-500">المغادرة</div>
+                            <div class="font-bold">${flight.departure}</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-gray-500">المدة</div>
+                            <div class="font-bold">${flight.duration}</div>
+                        </div>
+                        <div>
+                            <div class="text-gray-500">الوصول</div>
+                            <div class="font-bold">${flight.arrival}</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <div class="text-gray-500">السعر</div>
+                            <div class="text-2xl font-bold">${flight.price}</div>
+                        </div>
+                        <a href="${flight.link}" target="_blank" class="book-button px-6 py-2">احجز الآن</a>
+                    </div>
+                `;
+                resultsContainer.appendChild(flightCard);
+            });
+            
+            document.getElementById('resultsSection').classList.remove('hidden');
+            window.scrollTo({
+                top: document.getElementById('resultsSection').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
